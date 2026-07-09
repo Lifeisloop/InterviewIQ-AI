@@ -1,0 +1,330 @@
+# InterviewIQ AI
+
+An AI-powered full-stack interview preparation platform that analyzes resumes, generates personalized interview questions, evaluates candidate answers, and produces detailed performance reports.
+
+## Overview
+
+InterviewIQ AI helps candidates practice job-specific interviews through an intelligent and personalized workflow.
+
+The platform extracts information from an uploaded resume, identifies candidate skills, considers the target job description, generates interview questions across multiple difficulty levels, evaluates answers using a local Large Language Model, and creates a final interview performance report.
+
+## Features
+
+- User registration and login
+- JWT-based authentication
+- Protected frontend routes
+- PDF resume upload
+- Resume information extraction
+- Candidate name, email, phone, and skill extraction
+- Resume-based interview personalization
+- Job-description-aware question generation
+- AI-generated interview questions
+- Multiple question categories and difficulty levels
+- Candidate answer evaluation
+- Score generation out of 10
+- Strength and weakness analysis
+- Ideal answer generation
+- Final interview performance report
+- Interactive React frontend
+- REST API backend
+- MySQL database integration
+- Local LLM integration using Ollama
+
+## Interview Categories
+
+The system can generate questions across categories such as:
+
+- Easy
+- Medium
+- Hard
+- Coding
+- HR
+
+Questions are personalized using candidate skills extracted from the uploaded resume and the target job description.
+
+## Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Axios
+- React Router
+
+### Backend
+
+- Python
+- FastAPI
+- Uvicorn
+- SQLAlchemy
+- Pydantic
+- PyMySQL
+
+### Database
+
+- MySQL
+
+### AI and NLP
+
+- Ollama
+- Llama 3.2
+- Prompt Engineering
+- AI-based answer evaluation
+- Resume information extraction
+
+### Authentication
+
+- JWT
+- Python JOSE
+- bcrypt
+
+### Development Tools
+
+- Git
+- GitHub
+- VS Code
+- Swagger UI
+- MySQL Workbench
+
+## System Workflow
+
+1. User creates an account or logs in.
+2. Backend generates a JWT access token.
+3. User uploads a PDF resume.
+4. The system extracts candidate information and technical skills.
+5. User provides a target job description.
+6. The platform generates personalized interview questions.
+7. Candidate answers interview questions.
+8. AI evaluates each answer.
+9. The system calculates scores.
+10. Strengths and weaknesses are identified.
+11. Ideal answers are generated.
+12. A final interview report is displayed.
+
+## Project Architecture
+
+```text
+InterviewIQ-AI/
+├── backend/
+│   ├── ai/
+│   │   ├── evaluation_prompt.py
+│   │   ├── llm.py
+│   │   └── prompt_builder.py
+│   │
+│   ├── database/
+│   │   ├── models/
+│   │   ├── base.py
+│   │   └── connection.py
+│   │
+│   ├── models/
+│   │   ├── ats_model.py
+│   │   ├── evaluation.py
+│   │   ├── interview_model.py
+│   │   ├── report_model.py
+│   │   ├── resume_model.py
+│   │   └── user_model.py
+│   │
+│   ├── routes/
+│   │   ├── auth.py
+│   │   ├── evaluation.py
+│   │   ├── interview.py
+│   │   ├── report.py
+│   │   └── resume.py
+│   │
+│   ├── services/
+│   │   ├── evaluation_service.py
+│   │   ├── information_extractor.py
+│   │   ├── interview_service.py
+│   │   ├── report_service.py
+│   │   ├── resume_parser.py
+│   │   ├── resume_service.py
+│   │   └── user_service.py
+│   │
+│   ├── utils/
+│   │   ├── dependencies.py
+│   │   └── security.py
+│   │
+│   ├── app.py
+│   ├── config.py
+│   ├── create_tables.py
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── frontend/
+│   ├── public/
+│   │
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── api.js
+│   │   │
+│   │   ├── components/
+│   │   │   └── ProtectedRoute.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Interview.jsx
+│   │   │   ├── Login.jsx
+│   │   │   └── Register.jsx
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── auth.css
+│   │   │   ├── dashboard.css
+│   │   │   ├── global.css
+│   │   │   └── interview.css
+│   │   │
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   ├── vite.config.js
+│   └── .env.example
+│
+├── .gitignore
+└── README.md
+
+API Endpoints
+Authentication
+Method	Endpoint	Description
+POST	/auth/register	Register a new user
+POST	/auth/login	Authenticate user and return JWT
+GET	/auth/me	Get authenticated user profile
+Resume
+Method	Endpoint	Description
+POST	/resume/upload-resume	Upload and analyze a PDF resume
+Interview
+Method	Endpoint	Description
+POST	/interview/generate	Generate AI interview questions
+POST	/interview/start	Start an interview session
+Evaluation
+Method	Endpoint	Description
+POST	/evaluation/evaluate	Evaluate a candidate answer
+Report
+Method	Endpoint	Description
+POST	/report/final	Generate final interview report
+Local Setup
+Prerequisites
+
+Install:
+
+Python 3.11+
+Node.js
+MySQL Server
+Ollama
+Git
+
+Make sure the Llama 3.2 model is available locally:
+
+ollama pull llama3.2
+Backend Setup
+
+Move into the backend directory:
+
+cd backend
+
+Create a virtual environment:
+
+python -m venv venv
+
+Activate it on Windows:
+
+venv\Scripts\activate
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Create a .env file using .env.example as a reference:
+
+DATABASE_URL=mysql+pymysql://username:password@localhost:3306/database_name
+SECRET_KEY=your_secure_secret_key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+Start the backend:
+
+python -m uvicorn app:app --reload
+
+Backend API:
+
+http://127.0.0.1:8000
+
+Swagger documentation:
+
+http://127.0.0.1:8000/docs
+Frontend Setup
+
+Open another terminal:
+
+cd frontend
+
+Install dependencies:
+
+npm install
+
+Create a frontend .env file:
+
+VITE_API_BASE_URL=http://127.0.0.1:8000
+
+Start the frontend:
+
+npm run dev
+
+Frontend application:
+
+http://localhost:5173
+
+The actual Vite port may differ if port 5173 is already in use.
+
+Environment Variables
+
+Real environment files are intentionally excluded from Git.
+
+Never commit:
+
+backend/.env
+frontend/.env
+
+Use these template files instead:
+
+backend/.env.example
+frontend/.env.example
+
+Screenshots
+
+![Login Page](<Screenshot 2026-07-09 225124.png>)
+![Registration Page](<Screenshot 2026-07-09 225643.png>)
+![Resume upload dashboard](<Screenshot 2026-07-09 225159.png>)
+![AI interview page](<Screenshot 2026-07-09 225242.png>)
+
+Future Improvements
+
+Speech-to-text interview answers
+Voice-based AI interviewer
+Webcam-based interview simulation
+Answer timer
+Interview history dashboard
+PDF report export
+ATS resume scoring
+Advanced analytics
+Cloud deployment
+Docker support
+Automated testing
+Role-specific interview templates
+
+Security
+
+Passwords are hashed using bcrypt.
+Authentication uses JWT access tokens.
+Protected APIs validate bearer tokens.
+Sensitive configuration is stored in environment variables.
+Real .env files are excluded from Git.
+
+Author
+Kush Gupta
+GitHub: Lifeisloop
+
+License
+
+This project is intended for educational and portfolio purposes.
