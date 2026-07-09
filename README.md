@@ -177,30 +177,48 @@ InterviewIQ-AI/
 │
 ├── .gitignore
 └── README.md
+```
 
-API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/auth/register	Register a new user
-POST	/auth/login	Authenticate user and return JWT
-GET	/auth/me	Get authenticated user profile
-Resume
-Method	Endpoint	Description
-POST	/resume/upload-resume	Upload and analyze a PDF resume
-Interview
-Method	Endpoint	Description
-POST	/interview/generate	Generate AI interview questions
-POST	/interview/start	Start an interview session
-Evaluation
-Method	Endpoint	Description
-POST	/evaluation/evaluate	Evaluate a candidate answer
-Report
-Method	Endpoint	Description
-POST	/report/final	Generate final interview report
-Local Setup
-Prerequisites
+## API Endpoints
 
-Install:
+### Authentication
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Authenticate user and return JWT |
+| GET | `/auth/me` | Get authenticated user profile |
+
+### Resume
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | `/resume/upload-resume` | Upload and analyze a PDF resume |
+
+### Interview
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | `/interview/generate` | Generate AI interview questions |
+| POST | `/interview/start` | Start an interview session |
+
+### Evaluation
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | `/evaluation/evaluate` | Evaluate a candidate answer |
+
+### Report
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | `/report/final` | Generate final interview report |
+
+## Local Setup
+
+### Prerequisites
+
+Install the following:
 
 - Python 3.11+
 - Node.js
@@ -212,7 +230,9 @@ Make sure the Llama 3.2 model is available locally:
 
 ```bash
 ollama pull llama3.2
-Backend Setup
+```
+
+## Backend Setup
 
 Move into the backend directory:
 
@@ -263,7 +283,9 @@ Swagger documentation:
 
 ```text
 http://127.0.0.1:8000/docs
-Frontend Setup
+```
+
+## Frontend Setup
 
 Open another terminal and move into the frontend directory:
 
@@ -313,28 +335,40 @@ Use these template files instead:
 ```text
 backend/.env.example
 frontend/.env.example
+```
 
-Screenshots
+## Screenshots
 
-![Login Page](<Screenshot 2026-07-09 225124.png>)
-![Registration Page](<Screenshot 2026-07-09 225643.png>)
-![Resume upload dashboard](<Screenshot 2026-07-09 225159.png>)
-![AI interview page](<Screenshot 2026-07-09 225242.png>)
+### Login Page
 
-Future Improvements
+![Login Page](screenshots/login.png)
 
-Speech-to-text interview answers
-Voice-based AI interviewer
-Webcam-based interview simulation
-Answer timer
-Interview history dashboard
-PDF report export
-ATS resume scoring
-Advanced analytics
-Cloud deployment
-Docker support
-Automated testing
-Role-specific interview templates
+### Registration Page
+
+![Registration Page](screenshots/register.png)
+
+### Resume Upload Dashboard
+
+![Resume Upload Dashboard](screenshots/dashboard.png)
+
+### AI Interview Page
+
+![AI Interview Page](screenshots/interview.png)
+
+## Future Improvements
+
+- Speech-to-text interview answers
+- Voice-based AI interviewer
+- Webcam-based interview simulation
+- Answer timer
+- Interview history dashboard
+- PDF report export
+- ATS resume scoring
+- Advanced analytics
+- Cloud deployment
+- Docker support
+- Automated testing
+- Role-specific interview templates
 
 ## Security
 
@@ -344,10 +378,15 @@ Role-specific interview templates
 - Sensitive configuration is stored in environment variables.
 - Real `.env` files are excluded from Git.
 
-Author
-Kush Gupta
-GitHub: Lifeisloop
+## Author
 
-License
+**Kush Gupta**
+
+MCA Student at Bennett University  
+BCA Graduate from Chandigarh University
+
+GitHub: `Lifeisloop`
+
+## License
 
 This project is intended for educational and portfolio purposes.
