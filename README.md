@@ -184,7 +184,7 @@ InterviewIQ-AI/
 ├── .gitignore
 └── README.md
 
-API Endpoints
+## API Endpoints
 Authentication
 Method	Endpoint	Description
 POST	/auth/register	Register a new user
@@ -206,7 +206,7 @@ POST	/report/final	Generate final interview report
 Local Setup
 Prerequisites
 
-Install:
+## Install:
 
 Python 3.11+
 Node.js
@@ -217,7 +217,8 @@ Git
 Make sure the Llama 3.2 model is available locally:
 
 ollama pull llama3.2
-Backend Setup
+
+## Backend Setup
 
 Move into the backend directory:
 
@@ -253,7 +254,8 @@ http://127.0.0.1:8000
 Swagger documentation:
 
 http://127.0.0.1:8000/docs
-Frontend Setup
+
+## Frontend Setup
 
 Open another terminal:
 
@@ -291,14 +293,14 @@ Use these template files instead:
 backend/.env.example
 frontend/.env.example
 
-Screenshots
+## Screenshots
 
 ![Login Page](<Screenshot 2026-07-09 225124.png>)
 ![Registration Page](<Screenshot 2026-07-09 225643.png>)
 ![Resume upload dashboard](<Screenshot 2026-07-09 225159.png>)
 ![AI interview page](<Screenshot 2026-07-09 225242.png>)
 
-Future Improvements
+## Future Improvements
 
 Speech-to-text interview answers
 Voice-based AI interviewer
@@ -313,7 +315,7 @@ Docker support
 Automated testing
 Role-specific interview templates
 
-Security
+## Security
 
 Passwords are hashed using bcrypt.
 Authentication uses JWT access tokens.
@@ -321,10 +323,10 @@ Protected APIs validate bearer tokens.
 Sensitive configuration is stored in environment variables.
 Real .env files are excluded from Git.
 
-Author
+## Author
 Kush Gupta
 GitHub: Lifeisloop
 
-License
+## License
 
 This project is intended for educational and portfolio purposes.
