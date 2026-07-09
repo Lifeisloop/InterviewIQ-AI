@@ -382,9 +382,6 @@ frontend/.env.example
 
 **Kush Gupta**
 
-MCA Student at Bennett University  
-BCA Graduate from Chandigarh University
-
 GitHub: `Lifeisloop`
 
 ## License
