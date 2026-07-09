@@ -154,29 +154,23 @@ InterviewIQ-AI/
 │
 ├── frontend/
 │   ├── public/
-│   │
 │   ├── src/
 │   │   ├── api/
 │   │   │   └── api.js
-│   │   │
 │   │   ├── components/
 │   │   │   └── ProtectedRoute.jsx
-│   │   │
 │   │   ├── pages/
 │   │   │   ├── Dashboard.jsx
 │   │   │   ├── Interview.jsx
 │   │   │   ├── Login.jsx
 │   │   │   └── Register.jsx
-│   │   │
 │   │   ├── styles/
 │   │   │   ├── auth.css
 │   │   │   ├── dashboard.css
 │   │   │   ├── global.css
 │   │   │   └── interview.css
-│   │   │
 │   │   ├── App.jsx
 │   │   └── main.jsx
-│   │
 │   ├── package.json
 │   ├── vite.config.js
 │   └── .env.example
@@ -184,7 +178,7 @@ InterviewIQ-AI/
 ├── .gitignore
 └── README.md
 
-## API Endpoints
+API Endpoints
 Authentication
 Method	Endpoint	Description
 POST	/auth/register	Register a new user
@@ -206,101 +200,128 @@ POST	/report/final	Generate final interview report
 Local Setup
 Prerequisites
 
-## Install:
+Install:
 
-Python 3.11+
-Node.js
-MySQL Server
-Ollama
-Git
+- Python 3.11+
+- Node.js
+- MySQL Server
+- Ollama
+- Git
 
 Make sure the Llama 3.2 model is available locally:
 
+```bash
 ollama pull llama3.2
-
-## Backend Setup
+Backend Setup
 
 Move into the backend directory:
 
+```bash
 cd backend
+```
 
 Create a virtual environment:
 
+```bash
 python -m venv venv
+```
 
 Activate it on Windows:
 
-venv\Scripts\activate
+```powershell
+.\venv\Scripts\Activate.ps1
+```
 
 Install dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
-Create a .env file using .env.example as a reference:
+Create a `.env` file using `.env.example` as a reference:
 
+```env
 DATABASE_URL=mysql+pymysql://username:password@localhost:3306/database_name
 SECRET_KEY=your_secure_secret_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
+```
 
 Start the backend:
 
+```bash
 python -m uvicorn app:app --reload
+```
 
 Backend API:
 
+```text
 http://127.0.0.1:8000
+```
 
 Swagger documentation:
 
+```text
 http://127.0.0.1:8000/docs
+Frontend Setup
 
-## Frontend Setup
+Open another terminal and move into the frontend directory:
 
-Open another terminal:
-
+```bash
 cd frontend
+```
 
 Install dependencies:
 
+```bash
 npm install
+```
 
-Create a frontend .env file:
+Create a frontend `.env` file:
 
+```env
 VITE_API_BASE_URL=http://127.0.0.1:8000
+```
 
 Start the frontend:
 
+```bash
 npm run dev
+```
 
 Frontend application:
 
+```text
 http://localhost:5173
+```
 
-The actual Vite port may differ if port 5173 is already in use.
+The actual Vite port may differ if port `5173` is already in use.
 
-Environment Variables
+## Environment Variables
 
 Real environment files are intentionally excluded from Git.
 
 Never commit:
 
+```text
 backend/.env
 frontend/.env
+```
 
 Use these template files instead:
 
+```text
 backend/.env.example
 frontend/.env.example
 
-## Screenshots
+Screenshots
 
 ![Login Page](<Screenshot 2026-07-09 225124.png>)
 ![Registration Page](<Screenshot 2026-07-09 225643.png>)
 ![Resume upload dashboard](<Screenshot 2026-07-09 225159.png>)
 ![AI interview page](<Screenshot 2026-07-09 225242.png>)
 
-## Future Improvements
+Future Improvements
 
 Speech-to-text interview answers
 Voice-based AI interviewer
@@ -317,16 +338,16 @@ Role-specific interview templates
 
 ## Security
 
-Passwords are hashed using bcrypt.
-Authentication uses JWT access tokens.
-Protected APIs validate bearer tokens.
-Sensitive configuration is stored in environment variables.
-Real .env files are excluded from Git.
+- Passwords are hashed using bcrypt.
+- Authentication uses JWT access tokens.
+- Protected APIs validate bearer tokens.
+- Sensitive configuration is stored in environment variables.
+- Real `.env` files are excluded from Git.
 
-## Author
+Author
 Kush Gupta
 GitHub: Lifeisloop
 
-## License
+License
 
 This project is intended for educational and portfolio purposes.
