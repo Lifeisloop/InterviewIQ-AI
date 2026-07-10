@@ -1,47 +1,87 @@
+import os
+
 from ollama import chat
+from openai import OpenAI
 
 
-MODEL_NAME = "llama3.2"
+LLM_PROVIDER = os.getenv(
+    "LLM_PROVIDER",
+    "ollama"
+).lower()
 
 
 def ask_llm(prompt: str) -> str:
     """
-    Send a prompt to the local Ollama model
-    and return the generated text response.
+    Send prompt to configured LLM provider.
+
+    Local:
+        LLM_PROVIDER=ollama
+
+    Production:
+        LLM_PROVIDER=openai
     """
 
-    if not prompt or not prompt.strip():
+    if LLM_PROVIDER == "openai":
+        return ask_openai(prompt)
+
+    return ask_ollama(prompt)
+
+
+def ask_ollama(prompt: str) -> str:
+    """
+    Use local Ollama model.
+    """
+
+    response = chat(
+        model="llama3.2",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        format="json"
+    )
+
+    return response["message"]["content"]
+
+
+def ask_openai(prompt: str) -> str:
+    """
+    Use OpenAI API for cloud deployment.
+    """
+
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    if not api_key:
         raise ValueError(
-            "Prompt cannot be empty."
+            "OPENAI_API_KEY is not configured."
         )
 
-    try:
-        response = chat(
-            model=MODEL_NAME,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt.strip()
-                }
-            ],
-            format="json"
-        )
+    client = OpenAI(
+        api_key=api_key
+    )
 
-        content = response["message"]["content"]
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are an AI interview evaluator "
+                    "and question generator. "
+                    "Always return valid JSON only. "
+                    "Do not use markdown code fences."
+                )
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        response_format={
+            "type": "json_object"
+        }
+    )
 
-        if not content:
-            raise ValueError(
-                "Ollama returned an empty response."
-            )
-
-        return content.strip()
-
-    except Exception as error:
-        print(
-            "OLLAMA ERROR:",
-            str(error)
-        )
-
-        raise RuntimeError(
-            f"Failed to generate AI response: {error}"
-        ) from error
+    return response.choices[0].message.content
