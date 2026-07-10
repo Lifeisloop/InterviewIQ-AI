@@ -61,24 +61,28 @@ Questions are personalized using candidate skills extracted from the uploaded re
 - SQLAlchemy
 - Pydantic
 - PyMySQL
+- python-jose
+- bcrypt
+- PyMuPDF (for PDF Resume parsing)
 
 ### Database
 
 - MySQL
+- SQLite (for lightweight cloud deployments)
 
 ### AI and NLP
 
-- Ollama
-- Llama 3.2
+- Groq Cloud API (Llama 3.3 70B - Free cloud LLM)
+- OpenAI API (GPT-4o-mini)
+- Ollama (Llama 3.2 - Local LLM)
 - Prompt Engineering
 - AI-based answer evaluation
 - Resume information extraction
 
 ### Authentication
 
-- JWT
-- Python JOSE
-- bcrypt
+- JWT (JSON Web Tokens)
+- bcrypt password hashing
 
 ### Development Tools
 
@@ -355,6 +359,18 @@ frontend/.env.example
 
 ![AI Interview Page](screenshots/interview.png)
 
+## Cloud Deployment
+
+The application is deployed and running live in the cloud:
+
+* **Frontend (Vercel)**: [https://interview-iq-ai-roan.vercel.app/](https://interview-iq-ai-roan.vercel.app/)
+* **Backend (Render)**: [https://interviewiq-ai-r4p3.onrender.com/](https://interviewiq-ai-r4p3.onrender.com/)
+
+### Production Configuration (Render Environment Variables)
+* `LLM_PROVIDER`: Set to `groq` (to use the free Groq Cloud API) or `openai`.
+* `GROQ_API_KEY`: Your Groq Cloud API secret key.
+* `DATABASE_URL`: Set to `sqlite:///database.db` (temporary file-based SQLite database) or your persistent cloud MySQL URL.
+
 ## Future Improvements
 
 - Speech-to-text interview answers
@@ -365,7 +381,6 @@ frontend/.env.example
 - PDF report export
 - ATS resume scoring
 - Advanced analytics
-- Cloud deployment
 - Docker support
 - Automated testing
 - Role-specific interview templates
