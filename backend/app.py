@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 
 from routes.interview import router as interview_router
@@ -7,20 +8,35 @@ from routes.auth import router as auth_router
 from routes.report import router as report_router 
 
 from fastapi.middleware.cors import CORSMiddleware
+from database.connection import engine
+from database.base import Base
+# Import models to register them on Base metadata for auto-creation
+from database.models.user import User
+from database.models.resume import Resume
+from database.models.interview import Interview
+
+# Auto-initialize database tables on startup
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title = "InterviewIQ-AI",
     version = "1.0"
 )
 
+# Load allowed origins from environment variable
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS")
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174"
+]
+if allowed_origins_env:
+    origins.extend([origin.strip() for origin in allowed_origins_env.split(",") if origin.strip()])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
