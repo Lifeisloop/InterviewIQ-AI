@@ -43,7 +43,6 @@ function Register() {
         }
       );
 
-      alert("Registration successful! Please login.");
       navigate("/");
 
     } catch (error) {
