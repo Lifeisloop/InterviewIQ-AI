@@ -27,8 +27,8 @@ The platform extracts information from an uploaded resume, identifies candidate 
 - Final interview performance report
 - Interactive React frontend
 - REST API backend
-- MySQL database integration
-- Local LLM integration using Ollama
+- SQLite / MySQL database integration
+- Cloud LLM integration using Groq Cloud API
 
 ## Interview Categories
 
@@ -67,14 +67,12 @@ Questions are personalized using candidate skills extracted from the uploaded re
 
 ### Database
 
-- MySQL
-- SQLite (for lightweight cloud deployments)
+- SQLite (default)
+- MySQL (supported)
 
 ### AI and NLP
 
 - Groq Cloud API (Llama 3.3 70B - Free cloud LLM)
-- OpenAI API (GPT-4o-mini)
-- Ollama (Llama 3.2 - Local LLM)
 - Prompt Engineering
 - AI-based answer evaluation
 - Resume information extraction
@@ -226,15 +224,7 @@ Install the following:
 
 - Python 3.11+
 - Node.js
-- MySQL Server
-- Ollama
 - Git
-
-Make sure the Llama 3.2 model is available locally:
-
-```bash
-ollama pull llama3.2
-```
 
 ## Backend Setup
 
@@ -265,7 +255,9 @@ pip install -r requirements.txt
 Create a `.env` file using `.env.example` as a reference:
 
 ```env
-DATABASE_URL=mysql+pymysql://username:password@localhost:3306/database_name
+DATABASE_URL=sqlite:///database.db
+LLM_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key_here
 SECRET_KEY=your_secure_secret_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
@@ -367,7 +359,7 @@ The application is deployed and running live in the cloud:
 * **Backend (Render)**: [https://interviewiq-ai-r4p3.onrender.com/](https://interviewiq-ai-r4p3.onrender.com/)
 
 ### Production Configuration (Render Environment Variables)
-* `LLM_PROVIDER`: Set to `groq` (to use the free Groq Cloud API) or `openai`.
+* `LLM_PROVIDER`: Set to `groq` (to use the free Groq Cloud API).
 * `GROQ_API_KEY`: Your Groq Cloud API secret key.
 * `DATABASE_URL`: Set to `sqlite:///database.db` (temporary file-based SQLite database) or your persistent cloud MySQL URL.
 
