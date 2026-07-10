@@ -1,4 +1,4 @@
-from ai.prompt_builder import build_interview_prompt,  build_interview_prompt
+from ai.prompt_builder import build_interview_prompt
 from ai.llm import ask_llm
 import json
 
