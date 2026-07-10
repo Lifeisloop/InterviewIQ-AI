@@ -31,6 +31,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
     try {
       setLoading(true);
       setMessage("");
@@ -59,6 +64,7 @@ function Login() {
         errMsg = detail.map(err => err.msg).join(", ");
       }
       setMessage(errMsg);
+      alert(errMsg);
     } finally {
       setLoading(false);
     }

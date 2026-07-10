@@ -19,6 +19,17 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Client-side validations
+    if (fullName.trim().length < 2) {
+      alert("Full Name must be at least 2 characters long.");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
     try {
       setLoading(true);
       setMessage("");
@@ -32,6 +43,7 @@ function Register() {
         }
       );
 
+      alert("Registration successful! Please login.");
       navigate("/");
 
     } catch (error) {
@@ -43,6 +55,7 @@ function Register() {
         errMsg = detail.map(err => err.msg).join(", ");
       }
       setMessage(errMsg);
+      alert(errMsg);
     } finally {
       setLoading(false);
     }
