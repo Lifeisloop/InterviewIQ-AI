@@ -32,7 +32,15 @@ origins = [
     "http://127.0.0.1:5174"
 ]
 if allowed_origins_env:
-    origins.extend([origin.strip() for origin in allowed_origins_env.split(",") if origin.strip()])
+    for origin in allowed_origins_env.split(","):
+        cleaned = origin.strip()
+        if cleaned:
+            origins.append(cleaned)
+            # Add version without trailing slash, and version with trailing slash
+            if cleaned.endswith("/"):
+                origins.append(cleaned[:-1])
+            else:
+                origins.append(cleaned + "/")
 
 app.add_middleware(
     CORSMiddleware,
