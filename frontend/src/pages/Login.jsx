@@ -51,11 +51,14 @@ function Login() {
       navigate("/dashboard");
 
     } catch (error) {
-      setMessage(
-        error.response?.data?.detail ||
-        "Login failed. Please check your credentials."
-      );
-
+      const detail = error.response?.data?.detail;
+      let errMsg = "Login failed. Please check your credentials.";
+      if (typeof detail === "string") {
+        errMsg = detail;
+      } else if (Array.isArray(detail)) {
+        errMsg = detail.map(err => err.msg).join(", ");
+      }
+      setMessage(errMsg);
     } finally {
       setLoading(false);
     }

@@ -35,11 +35,14 @@ function Register() {
       navigate("/");
 
     } catch (error) {
-      setMessage(
-        error.response?.data?.detail ||
-        "Registration failed."
-      );
-
+      const detail = error.response?.data?.detail;
+      let errMsg = "Registration failed.";
+      if (typeof detail === "string") {
+        errMsg = detail;
+      } else if (Array.isArray(detail)) {
+        errMsg = detail.map(err => err.msg).join(", ");
+      }
+      setMessage(errMsg);
     } finally {
       setLoading(false);
     }
