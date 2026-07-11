@@ -353,15 +353,14 @@ frontend/.env.example
 
 ## Cloud Deployment
 
-The application is deployed and running live in the cloud:
+The entire application (both frontend and backend) is deployed as a single unified service running live on Render:
 
-* **Frontend (Vercel)**: [https://interview-iq-ai-roan.vercel.app/](https://interview-iq-ai-roan.vercel.app/)
-* **Backend (Render)**: [https://interviewiq-ai-r4p3.onrender.com/](https://interviewiq-ai-r4p3.onrender.com/)
+* **Production URL**: [https://interviewiq-ai-r4p3.onrender.com/](https://interviewiq-ai-r4p3.onrender.com/)
 
 ### Production Configuration (Render Environment Variables)
 * `LLM_PROVIDER`: Set to `groq` (to use the free Groq Cloud API).
 * `GROQ_API_KEY`: Your Groq Cloud API secret key.
-* `DATABASE_URL`: Set to `sqlite:///database.db` (temporary file-based SQLite database) or your persistent cloud MySQL URL.
+* `DATABASE_URL`: Set to `sqlite:///database.db` (temporary file-based SQLite database).
 
 ## Future Improvements
 
