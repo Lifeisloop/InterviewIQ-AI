@@ -1,5 +1,7 @@
 import os
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from routes.interview import router as interview_router
 from routes.evaluation import router as evaluation_router
@@ -50,9 +52,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get("/")
-def home():
+@app.get("/api/health")
+def health_check():
     return {
+        "status": "healthy",
         "message": "InterviewIQ AI Backend Running Successfully.."
     }
 
@@ -90,3 +93,34 @@ app.include_router(
     prefix="/report",
     tags=["Report"]
 )
+
+# Serve static React frontend files in production
+DIST_DIR = os.path.join(os.path.dirname(__file__), "../frontend/dist")
+
+if os.path.exists(DIST_DIR):
+    # Mount the Vite assets folder
+    assets_dir = os.path.join(DIST_DIR, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    # Catch-all route to serve the React SPA
+    @app.get("/{catchall:path}")
+    def serve_spa(catchall: str):
+        # Serve exact file if it exists in the build output (like favicon.svg, manifest.json, etc.)
+        file_path = os.path.join(DIST_DIR, catchall)
+        if catchall and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        
+        # Default fallback to serve index.html for React Router client routes
+        index_path = os.path.join(DIST_DIR, "index.html")
+        if os.path.exists(index_path):
+            return FileResponse(index_path)
+        
+        return {"error": "Frontend index.html not found."}
+else:
+    # Fallback endpoint if frontend isn't built yet
+    @app.get("/{catchall:path}")
+    def serve_fallback(catchall: str):
+        return {
+            "error": "Frontend build files not found. Please run 'npm run build' inside the frontend folder."
+        }
